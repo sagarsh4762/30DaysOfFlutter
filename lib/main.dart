@@ -1,4 +1,4 @@
-// ignore_for_file: invalid_required_named_param, use_key_in_widget_constructors
+// ignore_for_file: invalid_required_named_param, use_key_in_widget_constructors, import_of_legacy_library_into_null_safe
 
 import 'package:flutter/material.dart';
 import 'package:flutterui/pages/home_page.dart';
@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(
         brightness: Brightness.dark,
       ),
-      initialRoute: "/home",
       routes: {
         "/": (context) => LoginPage(),
         "/home": (context) => HomePage(),
