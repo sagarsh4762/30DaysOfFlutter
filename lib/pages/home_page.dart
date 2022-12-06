@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Catalog App",
-          style: TextStyle(color: Colors.black),
         ),
       ),
       body: Center(
