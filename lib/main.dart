@@ -1,9 +1,10 @@
-// ignore_for_file: invalid_required_named_param, use_key_in_widget_constructors, import_of_legacy_library_into_null_safe
+// ignore_for_file: invalid_required_named_param, use_key_in_widget_constructors, import_of_legacy_library_into_null_safe, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:flutterui/pages/home_page.dart';
 import 'package:flutterui/pages/login_page.dart';
 import 'package:flutterui/utils/routes.dart';
+import 'package:flutterui/widgets/theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,13 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
+      theme: MyTheme.lighttheme(context),
       debugShowCheckedModeBanner: false,
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-      ),
+      darkTheme: MyTheme.darkTheme(context),
       initialRoute: MyRoutes.homeRoute,
       routes: {
         "/": (context) => LoginPage(),
