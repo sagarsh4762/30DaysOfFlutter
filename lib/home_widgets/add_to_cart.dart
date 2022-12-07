@@ -6,22 +6,17 @@ import '../models/cart.dart';
 import '../models/catalog.dart';
 import '../widgets/theme.dart';
 
-class AddtoCart extends StatefulWidget {
+class AddtoCart extends StatelessWidget {
   final Item catalog;
-  const AddtoCart({
+  AddtoCart({
     Key? key,
     required this.catalog,
   }) : super(key: key);
 
-  @override
-  State<AddtoCart> createState() => AddtoCartState();
-}
-
-class AddtoCartState extends State<AddtoCart> {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    bool isInCart = _cart.items.contains(widget.catalog) ?? false;
+    bool isInCart = _cart.items.contains(catalog) ?? false;
     return ElevatedButton(
         onPressed: () {
           if (!isInCart) {
@@ -29,8 +24,8 @@ class AddtoCartState extends State<AddtoCart> {
             final _catalog = CatalogModel();
 
             _cart.catalog = _catalog;
-            _cart.add(widget.catalog);
-            setState(() {});
+            _cart.add(catalog);
+            //setState(() {});
           }
         },
         child: isInCart
