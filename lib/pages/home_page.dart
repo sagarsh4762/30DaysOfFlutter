@@ -7,6 +7,10 @@ import 'package:flutterui/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'dart:convert';
 
+import '../home_widgets/catalog_header.dart';
+import '../home_widgets/catalog_image.dart';
+import '../home_widgets/catalog_list.dart';
+
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
@@ -50,41 +54,11 @@ class _HomePageState extends State<HomePage> {
                 if (CatalogModel.items.isNotEmpty)
                   CatalogList().expand()
                 else
-                  const Center(
-                    child: CircularProgressIndicator(),
-                  )
+                  const CircularProgressIndicator().py16().centered().expand(),
               ],
             )),
       ),
     );
-  }
-}
-
-class CtalogHeader extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        "Catalog App".text.xl5.bold.color(MyTheme.darkBluishColor).make(),
-        "Trending Products".text.xl2.make(),
-      ],
-    );
-  }
-}
-
-class CatalogList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        shrinkWrap: true,
-        itemCount: CatalogModel.items.length,
-        itemBuilder: ((context, index) {
-          final catalog = CatalogModel.items[index];
-          return CatalogItem(
-            catalog: catalog,
-          );
-        }));
   }
 }
 
@@ -127,22 +101,5 @@ class CatalogItem extends StatelessWidget {
         ],
       ),
     ).white.rounded.square(150).make().p16();
-  }
-}
-
-class CatalogImage extends StatelessWidget {
-  final String image;
-
-  const CatalogImage({Key? key, required this.image}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Image.network(image)
-        .box
-        .rounded
-        .p8
-        .color(MyTheme.creamColor)
-        .make()
-        .p16()
-        .w32(context);
   }
 }
