@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: public_member_api_docs, sort_constructors_first, unused_import
 // ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers, import_of_legacy_library_into_null_safe, unused_local_variable
 
 import 'dart:convert';
@@ -6,9 +6,10 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutterui/core/store.dart';
+import 'package:flutterui/models/cart.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import 'package:flutterui/models/cart.dart';
 import 'package:flutterui/models/catalog.dart';
 import 'package:flutterui/utils/routes.dart';
 import 'package:flutterui/widgets/theme.dart';
@@ -17,6 +18,7 @@ import '../home_widgets/add_to_cart.dart';
 import '../home_widgets/catalog_header.dart';
 import '../home_widgets/catalog_image.dart';
 import '../home_widgets/catalog_list.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -27,6 +29,8 @@ class _HomePageState extends State<HomePage> {
   final int days = 30;
 
   final String name = "Sagar";
+
+  final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefs3";
 
   @override
   void initState() {
@@ -49,12 +53,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
       backgroundColor: context.canvasColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
-        backgroundColor: MyTheme.darkBluishColor,
-        child: const Icon(CupertinoIcons.cart),
+      floatingActionButton: VxBuilder(
+        mutations: const {AddMutation, RemoveMutation},
+        builder: (context, store, status) => FloatingActionButton(
+          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+          backgroundColor: MyTheme.darkBluishColor,
+          child: const Icon(CupertinoIcons.cart),
+        ).badge(
+            color: Vx.red500,
+            size: 22,
+            count: _cart.items.length,
+            textStyle: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold)),
       ),
       body: SafeArea(
         child: Container(
@@ -112,4 +125,3 @@ class CatalogItem extends StatelessWidget {
     ).white.rounded.square(150).make().p16();
   }
 }
-
