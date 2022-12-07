@@ -1,8 +1,10 @@
 // ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers, import_of_legacy_library_into_null_safe
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterui/models/catalog.dart';
+import 'package:flutterui/utils/routes.dart';
 import 'package:flutterui/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'dart:convert';
@@ -43,6 +45,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
+        backgroundColor: MyTheme.darkBluishColor,
+        child: const Icon(CupertinoIcons.cart),
+      ),
       backgroundColor: MyTheme.creamColor,
       body: SafeArea(
         child: Container(
@@ -90,7 +97,7 @@ class CatalogItem extends StatelessWidget {
                   "\$${catalog.price}".text.bold.xl.make(),
                   ElevatedButton(
                       onPressed: () {},
-                      child: "Buy".text.make(),
+                      child: "Add to cart".text.make(),
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all(const StadiumBorder()),
                         backgroundColor:

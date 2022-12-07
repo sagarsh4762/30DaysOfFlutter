@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_required_named_param, use_key_in_widget_constructors, import_of_legacy_library_into_null_safe, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutterui/pages/cart_page.dart';
 import 'package:flutterui/pages/home_page.dart';
 import 'package:flutterui/pages/login_page.dart';
 import 'package:flutterui/utils/routes.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => LoginPage(),
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
+        MyRoutes.cartRoute: (context) => CartPage(),
       },
     );
   }
