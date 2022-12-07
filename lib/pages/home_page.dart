@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 CtalogHeader(),
                 if (CatalogModel.items.isNotEmpty)
-                  CatalogList().expand()
+                  CatalogList().py16().expand()
                 else
                   const CircularProgressIndicator().py16().centered().expand(),
               ],
@@ -72,7 +72,9 @@ class CatalogItem extends StatelessWidget {
     return VxBox(
       child: Row(
         children: [
-          CatalogImage(image: catalog.image),
+          Hero(
+              tag: Key(catalog.id.toString()),
+              child: CatalogImage(image: catalog.image)),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterui/pages/home_details_page.dart';
 
 import '../models/catalog.dart';
 import '../pages/home_page.dart';
@@ -11,8 +12,14 @@ class CatalogList extends StatelessWidget {
         itemCount: CatalogModel.items.length,
         itemBuilder: ((context, index) {
           final catalog = CatalogModel.items[index];
-          return CatalogItem(
-            catalog: catalog,
+          return InkWell(
+            onTap: (() => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => HomeDetailPage(catalog: catalog)))),
+            child: CatalogItem(
+              catalog: catalog,
+            ),
           );
         }));
   }
