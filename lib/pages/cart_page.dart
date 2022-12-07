@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutterui/models/cart.dart';
 import 'package:flutterui/widgets/theme.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -25,6 +26,7 @@ class CartPage extends StatelessWidget {
 }
 
 class _CardTotal extends StatelessWidget {
+  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -32,12 +34,12 @@ class _CardTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          "\$999".text.xl5.color(context.accentColor).make(),
+          "\$${_cart.totalPrice}".text.xl5.color(context.accentColor).make(),
           30.widthBox,
           ElevatedButton(
                   onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: "Buying not supported yet".text.make()));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: "Buying not supported yet".text.make()));
                   },
                   child: "Buy".text.white.make(),
                   style: ButtonStyle(
@@ -51,17 +53,18 @@ class _CardTotal extends StatelessWidget {
 }
 
 class _CartList extends StatelessWidget {
+  final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 5,
+      itemCount: _cart.items.length,
       itemBuilder: ((context, index) => ListTile(
             leading: const Icon(Icons.done),
             trailing: IconButton(
               icon: const Icon(Icons.remove_circle_outline),
               onPressed: () {},
             ),
-            title: "Item 1".text.make(),
+            title: _cart.items[index].name.text.make(),
           )),
     );
   }

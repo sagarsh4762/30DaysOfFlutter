@@ -4,7 +4,12 @@
 import 'package:flutterui/models/catalog.dart';
 
 class CartModel {
-  CatalogModel _catalog = CatalogModel.items.isEmpty as CatalogModel;
+  static final catModel = CartModel._internal();
+  CartModel._internal();
+
+  factory CartModel() => catModel;
+
+  late CatalogModel _catalog;
   final List<int> _itemIds = [];
 
   CatalogModel get catalog => _catalog;
